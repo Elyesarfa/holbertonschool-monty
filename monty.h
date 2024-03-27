@@ -1,5 +1,5 @@
-ifndef STACK_H
-#define STACK_H
+#ifndef MONTY_H
+#define MONTY_H
 
 #define STACK_SIZE 1000
 
