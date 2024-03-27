@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Stack stack;
+Stack stack; // Global stack
 
 void initStack() {
     stack.top = -1;
@@ -52,7 +52,7 @@ void add() {
 }
 
 void nop() {
-
+    // Does nothing
 }
 
 void pall() {
