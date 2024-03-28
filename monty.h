@@ -48,6 +48,7 @@ void free_stack(stack_t *stack);
 void split(stack_t **stack, unsigned int line_number, char *opcode);
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
+void _pint(stack_t **stack, unsigned int line_number);
 
 extern stack_t *head;
 
