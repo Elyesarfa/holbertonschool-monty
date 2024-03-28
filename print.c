@@ -8,7 +8,7 @@
 void _pint(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node = *stack;
-	
+
 	if (node != NULL)
 	{
 		printf("%d\n", node->n);
