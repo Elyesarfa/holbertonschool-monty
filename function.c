@@ -1,10 +1,10 @@
 #include "monty.h"
-
 /**
  * _push - Pushes an element to the stack.
  * @stack: Pointer to the top of the stack
  * @line_number: Line number being executed
  */
+ 
 void _push(stack_t **stack, unsigned int line_number)
 {
     stack_t *newnode;
@@ -14,7 +14,7 @@ void _push(stack_t **stack, unsigned int line_number)
     op = strtok(NULL, "$ \n\t");
     if (op == NULL || !isdigit(*op))
     {
-        fprintf(stderr, "L%d: usage: push integer\n", line_number);
+        fprintf(stderr, "L%d: usage: push integer", line_number);
         exit(EXIT_FAILURE);
     }
 
