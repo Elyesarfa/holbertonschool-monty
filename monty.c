@@ -1,47 +1,45 @@
 #include "monty.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-/*
-*
-*/
 
-int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
-        exit(EXIT_FAILURE);
-    }
-
-    FILE *file = fopen(argv[1], "r");
-    if (file == NULL) {
-        fprintf(stderr, "Error opening file\n");
-        exit(EXIT_FAILURE);
-    }
-    
-    initStack();
-
-    char opcode[10];
-    int arg;
+/**
+ * main - Entry point for the Monty interpreter
+ * @argc: Number of arguments
+ * @argv: Array of arguments
+ * Return: Always 0
+ */
+int main(int argc, char *argv[])
+{
+    char *delimiters = " \n\t";
+    char *opcode;
+    stack_t *stack = NULL;
     int line_number = 0;
+    FILE *file;
+    char *buffer = NULL;
+    size_t len = 0;
+    ssize_t read;
 
-    while (fscanf(file, "%s", opcode) != EOF) {
-        line_number++;
-        if (strcmp(opcode, "push") == 0) {
-            if (fscanf(file, "%d", &arg) != 1) {
-                fprintf(stderr, "L%d: usage: push integer\n", line_number);
-                exit(EXIT_FAILURE);
-            }
-            push(arg);
-        } else if (strcmp(opcode, "pall") == 0) {
-            pall();
-        } else if (strcmp(opcode, "nop") == 0) {
-            nop();
-        } else {
-            fprintf(stderr, "L%d: Unknown opcode: %s\n", line_number, opcode);
-            exit(EXIT_FAILURE);
-        }
+    if (argc != 2)
+    {
+        fprintf(stderr, "USAGE: monty file\n");
+        exit(EXIT_FAILURE);
     }
 
+    file = fopen(argv[1], "r");
+    if (file == NULL)
+    {
+        fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+        exit(EXIT_FAILURE);
+    }
+
+    while ((read = getline(&buffer, &len, file)) != -1)
+    {
+        line_number++;
+        opcode = strtok(buffer, delimiters);
+        if (opcode != NULL)
+            split(&stack, line_number, opcode);
+    }
+
+    free(buffer);
+    freestack(stack);
     fclose(file);
-    return 0;
+    return (0);
 }
